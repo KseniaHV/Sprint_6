@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 @RunWith(Parameterized.class)
 public class LionTest {
     @Mock
@@ -41,9 +43,9 @@ public class LionTest {
         boolean actualHasMane = lion.doesHaveMane();
         assertEquals(doesHaveMane, actualHasMane);
     }
-    @Test(expected = Exception.class)
-    public void testWithInvalidSex() throws Exception {
-        Lion lionWithInvalidSex = new Lion("InvalidSex", Mockito.mock(Feline.class));
+    @Test
+    public void testWithInvalidSex() {
+        assertThrows(Exception.class, () -> new Lion("InvalidSex", Mockito.mock(Feline.class)));
     }
     @Test
     public void testGetFood() throws Exception {

@@ -16,11 +16,9 @@ public class FelineTest {
     @Mock
     private Animal animal;
     private Feline feline;
-    private List<String> expectedFood;
     private int expectedKittens;
 
-    public FelineTest(List<String> expectedFood, int expectedKittens) {
-        this.expectedFood = expectedFood;
+    public FelineTest(int expectedKittens) {
         this.expectedKittens = expectedKittens;
     }
     @Before
@@ -31,14 +29,15 @@ public class FelineTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                { Arrays.asList("Животные", "Птицы", "Рыба"), 5 },
-                { Arrays.asList("Животные", "Птицы", "Рыба"), 3 },
-                { Arrays.asList("Животные", "Птицы", "Рыба"), 1 }
+                { 5 },
+                { 3 },
+                { 1 }
         });
     }
     @Test
     public void testEatMeat() throws Exception {
-        Mockito.when(animal.getFood("Хищник")).thenReturn(expectedFood);
+        List<String> expectedFood = Arrays.asList("Животные", "Птицы", "Рыба");
+       Mockito.when(animal.getFood("Хищник")).thenReturn(expectedFood);
         List<String> actualFood = feline.eatMeat();
         assertEquals(expectedFood, actualFood);
     }
